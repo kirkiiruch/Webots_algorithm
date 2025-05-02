@@ -1,0 +1,327 @@
+#VRML_SIM R2023b utf8
+
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/backgrounds/protos/TexturedBackground.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/backgrounds/protos/TexturedBackgroundLight.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/floors/protos/RectangleArena.proto"
+
+WorldInfo {
+}
+Viewpoint {
+  orientation 0.4585158011734359 -0.4859442307102551 -0.7440574337466836 4.477047688686801
+  position -0.12142326922579945 -1.6305108772901062 1.691242667100551
+}
+TexturedBackground {
+}
+TexturedBackgroundLight {
+}
+RectangleArena {
+  translation 0 -0.01 0
+  floorSize 2.5 2.5
+}
+DEF Robot Robot {
+  translation -0.129983 -1.12999 -0.00811199
+  rotation 0.4156701833003494 0.9095092061101682 0.0033619512051397973 0.01976808350938158
+  children [
+    Compass {
+      translation 0 0 0.02
+      rotation 1 0 0 0
+      children [
+        DEF compas Shape {
+          appearance PBRAppearance {
+            baseColor 0.5 0.6 0
+          }
+          geometry Box {
+            size 0.001 0.001 0.01
+          }
+        }
+      ]
+      boundingObject USE compas
+      physics Physics {
+        density -1
+        mass 1
+      }
+    }
+    DEF left_wheel Hinge2Joint {
+      jointParameters HingeJointParameters {
+        axis 0 0 1
+        anchor -0.03 0.03 0.02
+      }
+      jointParameters2 JointParameters {
+        axis 1 0 0
+      }
+      device [
+        RotationalMotor {
+          name "left_motor1"
+        }
+        DEF left_position_sensor PositionSensor {
+          name "left_position_sensor"
+        }
+      ]
+      device2 [
+        DEF left_motor2 RotationalMotor {
+          name "left_motor2"
+        }
+      ]
+      endPoint Solid {
+        translation -0.030067132544158763 0.029972472432915703 0.02008036136196099
+        rotation -0.0002393234700932588 0.9999999427246754 -0.00023932179638991945 4.7122434362721
+        children [
+          DEF left_wheel Shape {
+            geometry Cylinder {
+              height 0.01
+              radius 0.03
+            }
+          }
+        ]
+        name "solid(1)"
+        boundingObject USE left_wheel
+        physics Physics {
+          density -1
+          mass 1
+        }
+      }
+    }
+    DEF right_wheel Hinge2Joint {
+      jointParameters DEF right_wheel HingeJointParameters {
+        axis 0 0 1
+        anchor 0.03 0.03 0.02
+      }
+      jointParameters2 DEF right_wheel2 JointParameters {
+        axis -1 0 0
+      }
+      device [
+        DEF right_motor1 RotationalMotor {
+          name "right_motor1"
+        }
+        DEF right_position_sensor PositionSensor {
+        }
+      ]
+      device2 [
+        DEF right_motor2 RotationalMotor {
+          name "right_motor2"
+        }
+      ]
+      endPoint Solid {
+        translation 0.029962872466978614 0.03001596442930908 0.02003496389844087
+        rotation -0.0007007743626816497 0.9999995088630339 -0.0007008487595387624 4.713038512198872
+        children [
+          DEF right_whell Shape {
+            geometry Cylinder {
+              height 0.01
+              radius 0.03
+            }
+          }
+        ]
+        name "solid(4)"
+        boundingObject USE right_whell
+        physics Physics {
+          density -1
+          mass 1
+        }
+      }
+    }
+    DEF front_sensor DistanceSensor {
+      translation 3.28628e-07 0.06 0.02
+      rotation 0 0 -1 -1.5707953071795862
+      name "front_sensor"
+    }
+    DEF zadne HingeJoint {
+      jointParameters DEF zadne HingeJointParameters {
+        position 15.547958575359896
+        axis -1 0 0
+        anchor 0 -0.04 0.02
+      }
+      device [
+        DEF rear_motor RotationalMotor {
+          name "rear_motor"
+        }
+      ]
+      endPoint DEF zadne Solid {
+        translation 5.1138318336939624e-05 -0.03993541987056107 0.01996292079632834
+        rotation -0.5132377617116257 -0.687877115851522 0.5132368590047216 1.9365052665114193
+        children [
+          DEF zadne Shape {
+            appearance PBRAppearance {
+              baseColor 0 0 0
+            }
+            geometry Cylinder {
+              height 0.01
+              radius 0.03
+            }
+          }
+        ]
+        name "solid(3)"
+        boundingObject USE zadne
+        physics Physics {
+          mass 1
+          centerOfMass [
+            0 0 0
+          ]
+        }
+      }
+    }
+    DEF body Solid {
+      translation 0 0 0.015
+      children [
+        DEF body Shape {
+          appearance PBRAppearance {
+          }
+          geometry Cylinder {
+            height 0.025
+            radius 0.05
+          }
+        }
+      ]
+      boundingObject USE body
+      physics Physics {
+        mass 1
+      }
+    }
+  ]
+  physics Physics {
+    density -1
+    mass 1
+  }
+  controller "three_wheeled_robot_controller"
+  controllerArgs [
+    ""
+  ]
+}
+DEF blue_wall Solid {
+  translation 0.37 -0.75 0.04
+  children [
+    Shape {
+      appearance PBRAppearance {
+      }
+      geometry Box {
+        size 0.2 1 0.1
+      }
+    }
+  ]
+}
+DEF blue_wall Solid {
+  translation -0.38 -0.75 0.04
+  children [
+    Shape {
+      appearance PBRAppearance {
+      }
+      geometry Box {
+        size 0.2 1 0.1
+      }
+    }
+  ]
+  name "solid(8)"
+}
+DEF blue_wall Solid {
+  translation -0.89 -0.47 0.04
+  children [
+    Shape {
+      appearance PBRAppearance {
+      }
+      geometry Box {
+        size 0.2 1 0.1
+      }
+    }
+  ]
+  name "solid(9)"
+}
+DEF blue_wall Solid {
+  translation 0.91 1.12 0.08
+  rotation 0 0 1 1.5708
+  children [
+    Shape {
+      appearance PBRAppearance {
+      }
+      geometry Box {
+        size 0.2 0.8 0.1
+      }
+    }
+  ]
+  name "solid(5)"
+}
+DEF white_wall Solid {
+  translation 0.86 -0.37 0.04
+  rotation 0 0 1 -1.5707953071795862
+  children [
+    Shape {
+      geometry Box {
+        size 0.2 0.78 0.1
+      }
+    }
+  ]
+  name "solid(1)"
+}
+DEF white_wall Solid {
+  translation -0.67 0.17 0.04
+  rotation 0 0 1 -1.5707953071795862
+  children [
+    Shape {
+      geometry Box {
+        size 0.2 0.78 0.1
+      }
+    }
+  ]
+  name "solid(7)"
+}
+DEF white_wall Solid {
+  translation -0.15 -0.51 0.04
+  rotation 0 0 1 1.01503e-06
+  children [
+    Shape {
+      geometry Box {
+        size 0.2 0.5 0.1
+      }
+    }
+  ]
+  name "solid(10)"
+}
+DEF wall1 Solid {
+  translation 0.18 -1.14 0.04
+  children [
+    Shape {
+      appearance PBRAppearance {
+      }
+      geometry Box {
+        size 0.3 0.2 0.1
+      }
+    }
+  ]
+  name "solid(2)"
+}
+DEF wall1 Solid {
+  translation 0.62 0.88 0.08
+  rotation 0 0 1 1.5708
+  children [
+    Shape {
+      appearance PBRAppearance {
+      }
+      geometry Box {
+        size 0.3 0.2 0.1
+      }
+    }
+  ]
+  name "solid(4)"
+}
+Solid {
+  translation 1.12 0.5 0
+  children [
+    Shape {
+      geometry Box {
+        size 0.2 1.5 0.1
+      }
+    }
+  ]
+  name "solid(3)"
+}
+Solid {
+  translation 0.12 0.38 0
+  rotation 0 0 1 -1.5707953071795862
+  children [
+    Shape {
+      geometry Box {
+        size 0.2 1.2 0.1
+      }
+    }
+  ]
+  name "solid(6)"
+}
