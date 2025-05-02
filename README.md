@@ -32,7 +32,3 @@ my_project/
 - Python 3.10+
 - PyCharm (optional, for development)
 
-## 🧑‍💻 Author
-
-Your Name / Team Name  
-Contact: [email@example.com]
